@@ -17,18 +17,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  int number = 0;
 
   void dangerAlert() {
-    setState(() {
-      number = number - 1;
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DangerAlert()),
+    );
   }
 
   void findRoute() {
-    setState(() {
-      number = number + 1;
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FindRoute()),
+    );
   }
 
   @override
@@ -48,7 +49,7 @@ class HomeScreenState extends State<HomeScreen> {
                 fit: BoxFit.cover,
               ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   new RaisedButton(
                     padding: const EdgeInsets.all(8.0),
@@ -62,14 +63,61 @@ class HomeScreenState extends State<HomeScreen> {
                     textColor: Colors.white,
                     color: Colors.red,
                     padding: const EdgeInsets.all(8.0),
-                    child: new Text(
-                      "Danger Alert!",
-                    ),
+                    child: new Text("Danger Alert!"),
                   ),
                 ],
               )
             ],
           ),
-        ));
+        )
+    );
+  }
+}
+
+
+
+class FindRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Find Route'),
+      ),
+      body: Center(
+        child: RaisedButton(
+          child: Text('DIRECTIONS'),             // this function can be changed accordingly
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+            // Navigate to second route when tapped.
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class DangerAlert extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Danger Alert"),        // this function can be changed accordingly
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+            // Navigate back to first route when tapped.
+          },
+          child: Text('DANGER!!!!!'),
+        ),
+      ),
+    );
   }
 }
