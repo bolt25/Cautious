@@ -11,6 +11,11 @@ Looking at the current world scenario we wanted to make an impact which would no
 We were really disgust by the current cases in India like Unnao and Nirbhaya. It feels really terible to be living in that kind of society, so rather than putting blame on others and empathizing for victims, we decided to come up with <b>Cautious</b> - An app that helps you take care of your safety. <br> 
 We want to prune each and every case so that there is no future victim.
 
+<h3>Usage and Running the application</h3>
+To use the application 
+on Android: Download the apk named app-release.apk provided in the repository and install it
+Webpage : www.cautious.herokuapp.com
+
 <h3> Tech-Stack </h3>
 <ul>
   <li> HTML, CSS, Bootstrap </li>
