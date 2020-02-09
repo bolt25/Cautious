@@ -20,6 +20,7 @@ We want to prune each and every case so that there is no future victim.
   <li> MapBox API </li>
   <li> Flutter </li>
   <li> Progressive Web Apps (PWA) </li>
+ </ul>
 
 
 <h3> Future Scalibility </h3>
