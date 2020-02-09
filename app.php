@@ -39,13 +39,27 @@
         background-color: red;
         border: none;
         z-index: 100;
+        color: white;
         margin-left: 45%;
         text-align: center; 
         position: absolute; 
         top: 80%; 
-        height: 80px; 
-        width: 200px; 
-        font-size: 20px; 
+        height: 10%; 
+        width: 25%; 
+        font-size: 100%; 
+        border-radius: 5%;
+    }
+    #finish{
+        background-color: green;
+        color: white;
+        border: none;
+        z-index: 100;
+        text-align: center; 
+        position: absolute; 
+        top: 80%; 
+        height: 10%; 
+        width: 25%; 
+        font-size: 100%; 
         border-radius: 5%;
     }
 </style>
@@ -63,16 +77,79 @@
     <source src="./High Frequency.mp3" type="audio/mpeg">
 </audio>
 
-<button  id="sos" ondblclick="playMusic()">DISTRESS CALL</button>
- 
+<div class="container">
+    <div class="row">
+        <button id="finish" class="col-4">END ROUTE</button>
+        <button  id="sos" class="col-4">DISTRESS CALL</button>
+    </div>
+</div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
 <script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyD9lJGvpzFYY3ctmcRGdLdJaAhNdAyhS5M",
+        authDomain: "cautious-8b6e4.firebaseapp.com",
+        databaseURL: "https://cautious-8b6e4.firebaseio.com",
+        projectId: "cautious-8b6e4",
+        storageBucket: "cautious-8b6e4.appspot.com",
+        messagingSenderId: "190211129776",
+        appId: "1:190211129776:web:243827c2f4a21f6a17d675",
+        measurementId: "G-33CJ4B6B1X"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let finish = document.querySelector("#finish");
+    finish.addEventListener('click', () => {
+        location.href = "feedback.php";
+    })
+
     let sos = document.querySelector("#sos");
     sos.addEventListener('dblclick', () => {
         let mus = document.querySelector('#playing');
         mus.play();
+        let user = firebase.auth().currentUser;
+
+        if (user) {
+            let docRef = db.collection("users").doc(user.uid);
+            docRef.get().then(function(doc) {
+                if (doc.exists) {
+                    var yourNumber = doc.data().emergency;
+                    console.log(yourNumber);
+                    var yourMessage = "Your friend is in trouble..."
+
+                    function getLinkWhastapp(number, message) {
+                        number = yourNumber;
+                        message = yourMessage.split(' ').join('%20')
+                        return console.log('whatsapp://send?phone=' + number + '&text=%20' + message)
+                    }
+                    getLinkWhastapp()
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+            
+            
+            
+        }
     });
     
+
 </script>
 <script>
 

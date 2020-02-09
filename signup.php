@@ -40,10 +40,13 @@
         <form id="signup-form">
             <h2 class="text-center">Signup</h2>       
             <div class="form-group">
-                <input type="text" id="signup-email" class="form-control" placeholder="Email" required="required">
+                <input type="email" id="signup-email" class="form-control" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <input type="password" id="signup-password" class="form-control" placeholder="Password" required="required">
+                <input type="string" id="signup-number" class="form-control" placeholder="Emergency Contact" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="signup-password" class="form-control" placeholder="Password" required>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary btn-block" value="Signup">
@@ -58,6 +61,8 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
 
     <script>
     // Your web app's Firebase configuration
@@ -75,6 +80,8 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
     const auth = firebase.auth();
+    const db = firebase.firestore();
+
     </script>
 
     <script src="./auth.js"></script>
